@@ -10,3 +10,15 @@ body {
     padding: 2em;
     height: 100vh;
 }
+
+#app {
+    padding: 4em 0em 0em 0em;
+}
+
+.questionBlock {
+    margin: 0em 0em 1em 0em;
+}
+
+.buttonChoice {
+    margin: 0em 1em 0em 1em;
+}
