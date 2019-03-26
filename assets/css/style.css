@@ -6,11 +6,20 @@ body {
     background-repeat: no-repeat;
     color: white;
     font-family: 'Major Mono Display', monospace;
+    font-size: 1em;
 }
 
 .container-fluid {
     padding: 2em;
     height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.bold {
+    padding: .2em;
+    font-style: italic;
+    background: orangered;
+    color: black;
 }
 
 /* =============== END GLOBAL STYLES =============== */
@@ -21,8 +30,13 @@ body {
     padding: 2em 0em 0em 0em;
 }
 
+#timer {
+    font-size: 1.5em;
+    color: orangered;
+}
+
 .question_Block {
-    margin: 1em 0em 3em 0em;
+    margin: 1em 0em 2em 0em;
 }
 
 .question_container {
@@ -31,15 +45,28 @@ body {
 }
 
 .answer_Container {
-    padding: 1em 0em 0em 0em;
+    padding: 0em 0em 0em 0em;
 }
 
 .buttonChoice {
     margin: 0em 1em 0em 0em;
+    border: 0.5px solid black;
+    transition-duration: 0.2s;
+}
+
+button:focus {
+    outline: none;
 }
 
 .buttonChoice:hover {
-    background: lightgray;
+    background: orangered;
+    border: 0.5px solid orangered;
+}
+
+.active {
+    background-color: orangered;
+    color: white;
+    border: 0.5px solid orangered;
 }
 
 /* =============== END JS APP CONTENT STYLES =============== */

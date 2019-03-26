@@ -10,24 +10,34 @@
 // question array of objects
 var questionsArray = [
     {
-        question: 'what is your home planet?',
+        question: 'What is your Home planet?',
         answer: 'earth',
         choices: ['earth', 'mars', 'jupiter', 'venus'],
     },
     {
-        question: 'which planet is the largest?',
+        question: 'which planet in our solar system is the largest?',
         answer: 'jupiter',
         choices: ['mercury', 'mars', 'jupiter', 'venus'],
     },
     {
-        question: 'which planet is the largest?',
-        answer: 'jupiter',
-        choices: ['mercury', 'mars', 'jupiter', 'venus'],
+        question: 'what type of supernova is considered the standard candle?',
+        answer: 'type 1-A',
+        choices: ['type 1-a', 'degrasse', 'newtonian', 'type 1-b'],
     },
     {
-        question: 'what is your home planet?',
-        answer: 'earth',
-        choices: ['earth', 'mars', 'jupiter', 'venus'],
+        question: 'what is the surface temperature of venus?',
+        answer: 'jupiter',
+        choices: ['864 f', '120 c', '675 f', '100 k'],
+    },
+    {
+        question: 'to which planet does the moon TiTAn belong?',
+        answer: 'saturn',
+        choices: ['jupiter', 'uranus', 'saturn', 'venus'],
+    },
+    {
+        question: 'what is the threshold of the suns gravitational influence?',
+        answer: 'ort cloud',
+        choices: ['oort cloud', 'kaiper belt', 'astroid belt', 'pluto'],
     }
 
 ];
@@ -48,10 +58,10 @@ for (i = 0; i < questionsArray.length; i++) { // loops through question objects 
     questionBlock.classList.add('question_Block'); // assigns class name to question block
     questionBlock.setAttribute("id", questionBlockID); // sets ID for appending the question container element
 
-    var questionCont = document.createElement('h4'); // creates the question container 
+    var questionCont = document.createElement('h6'); // creates the question container 
     questionCont.classList.add('question_Container'); // assigns class name to question container
 
-    var content = document.createTextNode(questionsArray[i].question); // create text node for the question
+    var content = document.createTextNode((i + 1) + '. ' + questionsArray[i].question); // create text node for the question
     questionCont.appendChild(content); // adds question text to question container element
 
     document.getElementById(questionBlockID).append(questionCont); // appends question container element to the question block element (by ID above)
@@ -90,6 +100,11 @@ $(document).ready(function () {
     console.log("Stayed at the ace hotel!");
 
     // buttons will need to have an active class added and removed to/from siblings to indicate this is our answer selection
+    $('.buttonChoice').on('click', function () {
+        $(this).addClass('active');
+        $(this).siblings().removeClass('active');
+    });
+
     // check all questions 
     // slecting answers will need to grab the text content of the button and compare it to the parent div's 'questionBlock' ID (0, 1, 2, etc.).
     // using the array position as an ID will give us an easy way to access that object (0, 1, etc.) to check for correct answers
