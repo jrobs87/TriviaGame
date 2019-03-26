@@ -15,10 +15,18 @@ body {
     padding: 4em 0em 0em 0em;
 }
 
-.questionBlock {
-    margin: 0em 0em 1em 0em;
+.question_Block {
+    margin: 1em 0em 3em 0em;
+}
+
+.answer_Container {
+    padding: 1em 0em 0em 0em;
 }
 
 .buttonChoice {
     margin: 0em 1em 0em 1em;
+}
+
+.buttonChoice:hover {
+    background: lightskyblue;
 }
