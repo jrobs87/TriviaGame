@@ -1,0 +1,12 @@
+body {
+    background-image: url(../img/ernest-ojeh-1398587-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    font-family: 'Major Mono Display', monospace;
+}
+
+.container-fluid {
+    padding: 2em;
+    height: 100vh;
+}
