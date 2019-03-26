@@ -5,6 +5,7 @@
 
 
 // declaring our variables
+// declaring our functions
 
 // question array of objects
 var questionsArray = [
@@ -19,6 +20,11 @@ var questionsArray = [
         choices: ['mercury', 'mars', 'jupiter', 'venus'],
     },
     {
+        question: 'which planet is the largest?',
+        answer: 'jupiter',
+        choices: ['mercury', 'mars', 'jupiter', 'venus'],
+    },
+    {
         question: 'what is your home planet?',
         answer: 'earth',
         choices: ['earth', 'mars', 'jupiter', 'venus'],
@@ -26,61 +32,58 @@ var questionsArray = [
 
 ];
 
-// loops through questin=on objects to create a new question block
-for (i = 0; i < questionsArray.length; i++) {
+// add a random background image via css to body for each new game (need array and random number gen)
+// add a randomizer and large question bank the questions can be shuffled for each game
+// add countdown timer element with changing colors as clock gets below 10 seconds or something similar
 
-    // [==========] BEGIN TESTING [==========]
+// [==========] BEGIN QUESTION BLOCK ELEMENTS [==========]
+
+for (i = 0; i < questionsArray.length; i++) { // loops through question objects to create a new question block
+
     var questionBlockID = 'question_Block_' + i;
-    var questionBlock = document.createElement('div'); // creates the question block
-    questionBlock.classList.add('question_Block'); // assigns class name to question block
-    document.getElementById('app').append(questionBlock); // appends question block div to the app element
-    questionBlock.setAttribute("id", questionBlockID); // sets value for question block to grab for answer checking later
+    var questionBlock = document.createElement('div'); // creates the question block element
 
-    var questionCont = document.createElement('h4'); // creates the question block
-    questionCont.classList.add('question_Container'); // assigns class name to question block
-    document.getElementById(questionBlockID).append(questionCont); // appends question div to the app element
-    questionCont.setAttribute("id", 'question_Container_' + i); // sets value for question block to grab for answer checking later
+    document.getElementById('app').append(questionBlock); // appends question block div to the app element
+
+    questionBlock.classList.add('question_Block'); // assigns class name to question block
+    questionBlock.setAttribute("id", questionBlockID); // sets ID for appending the question container element
+
+    var questionCont = document.createElement('h4'); // creates the question container 
+    questionCont.classList.add('question_Container'); // assigns class name to question container
 
     var content = document.createTextNode(questionsArray[i].question); // create text node for the question
-    questionCont.appendChild(content); // adds question text to div
+    questionCont.appendChild(content); // adds question text to question container element
 
-    var answerContainerID = 'answer_Container_' + i;
-    var answerCont = document.createElement('div'); // creates the question block
-    answerCont.classList.add('answer_Container'); // assigns class name to question block
-    document.getElementById(questionBlockID).append(answerCont);
-    answerCont.setAttribute("id", answerContainerID);
+    document.getElementById(questionBlockID).append(questionCont); // appends question container element to the question block element (by ID above)
 
-    // [==========] END TESTING [==========]
+    var answerContainerID = 'answer_Container_' + i; // assigns ID to append answers 
+    var answerCont = document.createElement('div'); // creates the answers container
+    answerCont.classList.add('answer_Container'); // assigns class name to answers container
 
+    document.getElementById(questionBlockID).append(answerCont); // adds answers container to the question block below the questions container
+    answerCont.setAttribute("id", answerContainerID); // assigns answer container ID to append button choices
 
-    // var questionBlock = document.createElement('div'); // creates the question block
-    // questionBlock.classList.add('questionBlock'); // assigns class name to question block
-    // questionBlock.setAttribute("id", i); // sets value for question block to grab for answer checking later
-
-    // var content = document.createTextNode(questionsArray[i].question); // create text node for the question
-    // questionBlock.appendChild(content); // adds question text to div
-
-    // document.getElementById('app').append(questionBlock); // appends question div to the app element
-    // // END RENDERING OF QUESTION BLOCK, QUESTION, AND ANSWER CONTAINERS 
-
-    // [========== BEGIN RENDERING ANSWER CHOICES ==========]
+    // [========== BEGIN ANSWER CHOICES ==========]
     for (a = 0; a < questionsArray[i].choices.length; a++) { // loops thru each answer choice in our question object to create a button
 
         var choice = document.createElement('button'); //creates button element
-        choice.setAttribute("class", "buttonChoice"); // sets value for question block to grab for clicks later
+        choice.setAttribute("class", "buttonChoice"); // sets class
 
         var contentChoice = document.createTextNode(questionsArray[i].choices[a]); // creates answer button
         choice.appendChild(contentChoice); // adds answer text to button
 
-        choice.setAttribute('value', i);
+        choice.setAttribute('value', i); // sets value to represent the object in the questionsArray to which it corresponds for checking answers
 
-        document.getElementById(answerContainerID).appendChild(choice); // appends button to the question block by ID -  this will require making a new container first
-        // [========== END RENDERING ANSWER CHOICES ==========]
+        document.getElementById(answerContainerID).appendChild(choice); // appends button to the question block by ID 
+
+
     };
+
+    // [========== END ANSWER CHOICES ==========]
 };
 
+// [==========] END QUESTION BLOCK ELEMENTS [==========]
 
-//declaring our functions
 
 // A $( document ).ready() block.
 $(document).ready(function () {
@@ -92,3 +95,15 @@ $(document).ready(function () {
     // using the array position as an ID will give us an easy way to access that object (0, 1, etc.) to check for correct answers
 
 });
+
+
+    // -- OUTDATED AND CAN BE REMOVED - QUESTION BLOCK GEN
+    // var questionBlock = document.createElement('div'); // creates the question block
+    // questionBlock.classList.add('questionBlock'); // assigns class name to question block
+    // questionBlock.setAttribute("id", i); // sets value for question block to grab for answer checking later
+
+    // var content = document.createTextNode(questionsArray[i].question); // create text node for the question
+    // questionBlock.appendChild(content); // adds question text to div
+
+    // document.getElementById('app').append(questionBlock); // appends question div to the app element
+    // // END RENDERING OF QUESTION BLOCK, QUESTION, AND ANSWER CONTAINERS 

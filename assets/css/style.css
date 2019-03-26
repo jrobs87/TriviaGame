@@ -1,3 +1,5 @@
+/* =============== BEGIN GLOBAL STYLES =============== */
+
 body {
     background-image: url(../img/ernest-ojeh-1398587-unsplash.jpg);
     background-size: cover;
@@ -11,12 +13,21 @@ body {
     height: 100vh;
 }
 
+/* =============== END GLOBAL STYLES =============== */
+
+/* =============== BEGIN JS APP CONTENT STYLES =============== */
+
 #app {
-    padding: 4em 0em 0em 0em;
+    padding: 2em 0em 0em 0em;
 }
 
 .question_Block {
     margin: 1em 0em 3em 0em;
+}
+
+.question_container {
+    font-size: 1em;
+    /* just a placeholder */
 }
 
 .answer_Container {
@@ -24,9 +35,11 @@ body {
 }
 
 .buttonChoice {
-    margin: 0em 1em 0em 1em;
+    margin: 0em 1em 0em 0em;
 }
 
 .buttonChoice:hover {
-    background: lightskyblue;
+    background: lightgray;
 }
+
+/* =============== END JS APP CONTENT STYLES =============== */
