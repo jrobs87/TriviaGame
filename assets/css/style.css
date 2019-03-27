@@ -46,6 +46,8 @@ body {
 
 .answer_Container {
     padding: 0em 0em 0em 0em;
+    transition-duration: 1s;
+    background: none;
 }
 
 .buttonChoice {
@@ -67,6 +69,11 @@ button:focus {
     background-color: orangered;
     color: white;
     border: 0.5px solid orangered;
+}
+
+#run {
+    background: black;
+    color: orangered;
 }
 
 /* =============== END JS APP CONTENT STYLES =============== */

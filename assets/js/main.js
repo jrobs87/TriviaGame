@@ -103,8 +103,10 @@ $(document).ready(function () {
     $('.buttonChoice').on('click', function () {
         $(this).addClass('active');
         $(this).siblings().removeClass('active');
+        $(this).siblings().addClass('passive');
     });
 
+    
     // check all questions 
     // slecting answers will need to grab the text content of the button and compare it to the parent div's 'questionBlock' ID (0, 1, 2, etc.).
     // using the array position as an ID will give us an easy way to access that object (0, 1, etc.) to check for correct answers
