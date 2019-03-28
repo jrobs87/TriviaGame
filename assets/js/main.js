@@ -1,4 +1,3 @@
-
 // [======================================== TRIVIA GAME SETUP ========================================]
 // For this project, I opted to not set the markup at the start and instead to have js do the rendering.
 // I wanted to practice DOM manipulation and traversals - this will help later when building dynamic apps.
@@ -7,7 +6,7 @@
 // declaring our variables
 // declaring our functions
 
-// question array of objects
+// question array of objects 
 var questionsArray = [
     {
         question: 'What is your Home planet?',
@@ -21,12 +20,12 @@ var questionsArray = [
     },
     {
         question: 'what type of supernova is considered the standard candle?',
-        answer: 'type 1-A',
+        answer: 'type 1-a',
         choices: ['type 1-a', 'degrasse', 'newtonian', 'type 1-b'],
     },
     {
         question: 'what is the surface temperature of venus?',
-        answer: 'jupiter',
+        answer: '864 f',
         choices: ['864 f', '120 c', '675 f', '100 k'],
     },
     {
@@ -36,18 +35,19 @@ var questionsArray = [
     },
     {
         question: 'what is the threshold of the suns gravitational influence?',
-        answer: 'ort cloud',
+        answer: 'oort cloud',
         choices: ['oort cloud', 'kaiper belt', 'astroid belt', 'pluto'],
     }
 
 ];
+
+var activeAnswers = 0; // count for active answers (used to set the submit button to blink once all questions have been answered)
 
 // add a random background image via css to body for each new game (need array and random number gen)
 // add a randomizer and large question bank the questions can be shuffled for each game
 // add countdown timer element with changing colors as clock gets below 10 seconds or something similar
 
 // [==========] BEGIN QUESTION BLOCK ELEMENTS [==========]
-
 for (i = 0; i < questionsArray.length; i++) { // loops through question objects to create a new question block
 
     var questionBlockID = 'question_Block_' + i;
@@ -82,45 +82,36 @@ for (i = 0; i < questionsArray.length; i++) { // loops through question objects 
         var contentChoice = document.createTextNode(questionsArray[i].choices[a]); // creates answer button
         choice.appendChild(contentChoice); // adds answer text to button
 
-        choice.setAttribute('value', i); // sets value to represent the object in the questionsArray to which it corresponds for checking answers
-
         document.getElementById(answerContainerID).appendChild(choice); // appends button to the question block by ID 
-
-
     };
-
     // [========== END ANSWER CHOICES ==========]
 };
-
 // [==========] END QUESTION BLOCK ELEMENTS [==========]
 
-
-// A $( document ).ready() block.
+// [==========] BEGIN USER-INPUTS AND GAME INTERACTIONS [==========]
 $(document).ready(function () {
-    console.log("Stayed at the ace hotel!");
+    console.log("Stayed at the ace hotel!"); // ready for the app to run 
 
     // buttons will need to have an active class added and removed to/from siblings to indicate this is our answer selection
     $('.buttonChoice').on('click', function () {
-        $(this).addClass('active');
-        $(this).siblings().removeClass('active');
-        $(this).siblings().addClass('passive');
+        $(this).addClass('active'); // sets the button class to active.  active class determines user answer
+        $(this).siblings().removeClass('active'); // removes active class from other button options 
+        var counta = $(".active").length; // counts active classes (once === question count the submit button flashes)
+
+        if (counta === questionsArray.length) {
+            $('#run').addClass('blink'); // sets the submit button to blink 
+        };
     });
 
-    
-    // check all questions 
-    // slecting answers will need to grab the text content of the button and compare it to the parent div's 'questionBlock' ID (0, 1, 2, etc.).
-    // using the array position as an ID will give us an easy way to access that object (0, 1, etc.) to check for correct answers
-
+    $('#run').on('click', function () {
+        for (b = 0; b < questionsArray.length; b++) {
+            buttonToCheck = '#answer_Container_' + b; // grabs the button container to access children (buttons)
+            if ($(buttonToCheck).children(".active").text() === questionsArray[b].answer) { // 'active' class compares text content (answer) to answer key in questionsArray objects
+                console.log('Question ' + b + ' is correct! The answer is ' + questionsArray[b].answer + '.'); // feedback for correct answer
+            } else {
+                console.log('Question ' + b + ' is incorrect... The answer is ' + questionsArray[b].answer) + '.'; // feedback for incorrect answer
+            };
+        };
+    });
 });
-
-
-    // -- OUTDATED AND CAN BE REMOVED - QUESTION BLOCK GEN
-    // var questionBlock = document.createElement('div'); // creates the question block
-    // questionBlock.classList.add('questionBlock'); // assigns class name to question block
-    // questionBlock.setAttribute("id", i); // sets value for question block to grab for answer checking later
-
-    // var content = document.createTextNode(questionsArray[i].question); // create text node for the question
-    // questionBlock.appendChild(content); // adds question text to div
-
-    // document.getElementById('app').append(questionBlock); // appends question div to the app element
-    // // END RENDERING OF QUESTION BLOCK, QUESTION, AND ANSWER CONTAINERS 
+// [==========] END USER-INPUTS AND GAME INTERACTIONS [==========]

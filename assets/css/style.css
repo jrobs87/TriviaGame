@@ -22,6 +22,7 @@ body {
     color: black;
 }
 
+
 /* =============== END GLOBAL STYLES =============== */
 
 /* =============== BEGIN JS APP CONTENT STYLES =============== */
@@ -76,4 +77,21 @@ button:focus {
     color: orangered;
 }
 
+
+/* Flash class and keyframe animation */
+.blink {
+    color:#f2f;
+      -webkit-animation: flash linear 1s infinite;
+      animation: flash linear 1s infinite;
+  }
+  @-webkit-keyframes flash {
+      0% { opacity: 1; } 
+      50% { opacity: .5; } 
+      100% { opacity: 1; }
+  }
+  @keyframes flash {
+      0% { opacity: 1; } 
+      50% { opacity: .5; } 
+      100% { opacity: 1; }
+  }
 /* =============== END JS APP CONTENT STYLES =============== */
