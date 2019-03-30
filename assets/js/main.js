@@ -34,6 +34,11 @@ var questionsArray = [
         choices: ['jupiter', 'uranus', 'saturn', 'venus'],
     },
     {
+        question: 'The famous Pale bLue Dot image was taken by which spacecraft?',
+        answer: 'voyager 1',
+        choices: ['sputnik', 'voyager 2', 'voyager 1', 'cassini'],
+    },
+    {
         question: 'what is the threshold of the suns gravitational influence?',
         answer: 'oort cloud',
         choices: ['oort cloud', 'kaiper belt', 'astroid belt', 'pluto'],

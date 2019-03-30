@@ -1,18 +1,22 @@
 /* =============== BEGIN GLOBAL STYLES =============== */
+html {
+    background: orangered;
+}
 
 body {
-    background-image: url(../img/ernest-ojeh-1398587-unsplash.jpg);
+    background-image: url(../img/moon.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     color: white;
     font-family: 'Major Mono Display', monospace;
+  
     font-size: 1em;
 }
 
 .container-fluid {
     padding: 2em;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.3);
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .bold {
@@ -81,17 +85,29 @@ button:focus {
 /* Flash class and keyframe animation */
 .blink {
     color:#f2f;
-      -webkit-animation: flash linear 1s infinite;
-      animation: flash linear 1s infinite;
+      -webkit-animation: flash linear 0.8s infinite;
+      animation: flash linear 0.8s infinite;
   }
   @-webkit-keyframes flash {
       0% { opacity: 1; } 
-      50% { opacity: .5; } 
+      50% { opacity: .2; } 
       100% { opacity: 1; }
   }
   @keyframes flash {
       0% { opacity: 1; } 
-      50% { opacity: .5; } 
+      50% { opacity: .2; } 
       100% { opacity: 1; }
   }
 /* =============== END JS APP CONTENT STYLES =============== */
+
+/* =============== BEGIN MODAL STYLES =============== */
+.modal {
+    width: 100%;
+    min-height: 100vh;
+    background: red;
+    color: white;
+    z-index: 10;
+}
+
+/* =============== END MODAL STYLES =============== */
+
