@@ -105,7 +105,6 @@ for (i = 0; i < questionsArray.length; i++) { // loops through question objects 
 // [==========] END QUESTION BLOCK ELEMENTS [==========]
 
 
-
 $(document).ready(function () {
 
     preventTimerCheck = true;
@@ -125,11 +124,11 @@ $(document).ready(function () {
             returnStatus = '';
 
             if (answer === questionsArray[b].answer) { // 'active' class compares text content (answer) to answer key in questionsArray objects
-                returnStatus = 'valid';
-                correctAnswers++;
+                returnStatus = 'valid'; // returns valid for answer text
+                correctAnswers++; // adds to score counter 
 
             } else {
-                returnStatus = 'error';
+                returnStatus = 'error'; // returns error for answer text
             };
 
             row = $('<div>');
@@ -145,19 +144,19 @@ $(document).ready(function () {
         percentage = Math.round(correctAnswers / questionsArray.length * 100);
 
         $('#percentCorrect').text('transmission accuracy: ' + percentage + "%")
-        if (percentage > 80) {
+        if (percentage >= 80) {
             $('#percentCorrect').css('color', 'greenyellow');
         } else if (percentage < 80) {
             $('#percentCorrect').css('color', 'yellow');
-        } if (percentage < 50) {
+        } if (percentage <= 50) {
             $('#percentCorrect').css('color', 'cyan');
         }
-        console.log(percentage)
+        console.log('Score result: ' + percentage + '%');
     };
 
     // [==========] BEGIN TIMER [==========]
     var counter = {
-        end: 31, // countdown timer - seconds 
+        end: 46, // countdown timer - seconds 
         endMessage: 'TimeouT', // message for time ending
     }; // declares counter object
 
