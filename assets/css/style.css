@@ -80,7 +80,7 @@ button:focus {
     border: 0.5px solid orangered;
 }
 
-#run {
+.buttonGen {
     margin: 1em 0em 0em 0em;
     background: black;
     color: orangered;
@@ -89,7 +89,7 @@ button:focus {
     transition-duration: .3s;
 }
 
-#run:hover {
+.buttonGen:hover {
     background: orangered;
     color: white;
     border-color: white;
@@ -102,7 +102,7 @@ button:focus {
 
 /* Flash class and keyframe animation */
 .blink {
-    color:#f2f;
+    color: greenyellow;
       -webkit-animation: flash linear 0.8s infinite;
       animation: flash linear 0.8s infinite;
   }
@@ -120,15 +120,20 @@ button:focus {
 
 /* =============== BEGIN MODAL STYLES =============== */
 #modal {
+    display: block;
+    position: fixed;
+    top: 0;
+    z-index: 100;
     background: black;
     min-height: 100vh;
     width: 100%;
-
+    padding: 10% 0 0 0;
 }
+
 #transData {
     width: 60%;
     margin: auto;
-    
+    visibility: inherit;
 }
 
 .checkRow {
@@ -136,4 +141,8 @@ button:focus {
     color: orangered;
 }
 /* =============== END MODAL STYLES =============== */
+
+.hidden {
+    visibility: hidden;
+}
 

@@ -44,8 +44,9 @@ var questionsArray = [ // question array of objects
 var activeAnswers = 0; // count for active answers (used to set the submit button to blink once all questions have been answered)
 var correctAnswers = 0;
 
-
-
+function refreshPage(){
+    window.location.reload();
+}
 
 // add a random background image via css to body for each new game (need array and random number gen)
 // add a randomizer and large question bank the questions can be shuffled for each game
@@ -99,24 +100,42 @@ $(document).ready(function () {
     preventTimerCheck = true;
 
     function check() {
+        preventTimerCheck = false; // prevents check() from being called on timeout
+        $('#modal').removeClass('hidden');
+
         for (b = 0; b < questionsArray.length; b++) {
+
             buttonToCheck = '#answer_Container_' + b; // grabs the button container to access children (buttons)
             answer = $(buttonToCheck).children(".active").text();
+            questionNumber = b + 1;
+
             if  (answer === questionsArray[b].answer) { // 'active' class compares text content (answer) to answer key in questionsArray objects
-                console.log('Question ' + b + ' is correct! The answer is ' + questionsArray[b].answer + '.'); // feedback for correct answer
+                
                 row = $('<div>');
                 row.addClass('checkRow');
 
                 question = questionsArray[b].question;
-                row.append(b + '. ' + question);
+                row.append(questionNumber + '. ' + question);
                 req = 'request > ' + answer + '  |  response > ' + questionsArray[b].answer + '  |  result > ok';
-                preventTimerCheck = false;
+                
 
                 $('#results').append(row);
                 $('#results').append(req);
 
                 correctAnswers++;
             } else {
+
+                row = $('<div>');
+                row.addClass('checkRow');
+
+                question = questionsArray[b].question;
+                row.append(questionNumber + '. ' + question);
+                req = 'request > ' + answer + '  |  response > ' + questionsArray[b].answer + '  |  result > invalid';
+                
+
+                $('#results').append(row);
+                $('#results').append(req);
+
                 console.log('Question ' + b + ' is incorrect... The answer is ' + questionsArray[b].answer) + '.'; // feedback for incorrect answer
             };
         };
@@ -132,7 +151,7 @@ $(document).ready(function () {
 
     timerEl = document.getElementById('timerCount'); // grab our div to show counter
 
-    // Start if not past end date 
+    // Start timer
     if (counter.end > 0) {
         secTicker = setInterval(function () {
             // Stop if passed end time
@@ -143,6 +162,7 @@ $(document).ready(function () {
 
                 if (preventTimerCheck) {
                 check(); // calls function to check win conditions
+                console.log('Check() on timeout.')
                 } else {
                     console.log('Check() on timeout prevented.')
                 };
@@ -171,6 +191,7 @@ $(document).ready(function () {
 
     $('#run').on('click', check);
 
+    $('#reload').on('click', refreshPage);
    
 });
 

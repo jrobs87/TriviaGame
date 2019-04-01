@@ -25,18 +25,18 @@
         <div class="row">
             <div class="col-xs">
                 <h1 style="background: black; color: white">Pale bLue dot Trivia</h1>
-                <div id="timer">T_minus: <span id='timerCount'>--</span></div>
+                <div id="timer">Trasmitting request in T_minus: <span id='timerCount'>--</span></div>
                 <div class="" id="app">
                     <!-- questions populated from javascript here -->
                 </div>
-                <button id="run">transmit request</button>
+                <button id="run" class="buttonGen">transmit request</button>
             </div>
             
         </div>
         
     </div>
 
-    <div class="" id="modal">
+    <div class="hidden" id="modal">
         <div id="transData">
         <h1>Transmission Request senT</h1>
         <table>
@@ -45,7 +45,7 @@
                 <td>ok</td>
             </tr>
             <tr>
-                <td>coms.............</td>
+                <td>comms.............</td>
                 <td>ok</td>
             </tr>
             <tr>
@@ -57,10 +57,14 @@
                 </tr>
             </tr>
         </table>
-        <h1>results received</h1>
 
-        <table id="results">
-        </table>
+        
+
+        <div id="results">
+                <h1>results received</h1>
+        </div>
+
+        <button class='buttonGen' id='reload'>rerun transmission</button>
     </div>
     </div>
 
