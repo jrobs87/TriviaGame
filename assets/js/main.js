@@ -130,7 +130,6 @@ $(document).ready(function () {
 
             } else {
                 returnStatus = 'error';
-                answer = '...'
             };
 
             row = $('<div>');
