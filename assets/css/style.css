@@ -1,4 +1,5 @@
 /* =============== BEGIN GLOBAL STYLES =============== */
+
 html {
     background: orangered;
 }
@@ -9,9 +10,8 @@ body {
     background-repeat: no-repeat;
     color: white;
     font-family: 'Major Mono Display', monospace;
-    font-size: 1em;
+    font-size: .8em;
 }
-
 
 .container-fluid {
     padding: 2em;
@@ -19,13 +19,13 @@ body {
     background: rgba(0, 0, 0, 0.8);
 }
 
-.bold {
-    padding: .2em;
-    font-style: italic;
-    background: orangered;
-    color: black;
+.hidden {
+    display: none;
 }
 
+button:focus {
+    outline: none;
+}
 
 /* =============== END GLOBAL STYLES =============== */
 
@@ -42,9 +42,6 @@ body {
 
 .question_Block {
     margin: 1em 0em 1em 0em;
-    border: 1px solid gray;
-    border-radius: 1em;
-    padding: 1em;
 }
 
 .question_container {
@@ -53,7 +50,7 @@ body {
 }
 
 .answer_Container {
-    padding: 0em 0em 0em 0em;
+    padding: .5em 0em 0em 0em;
     transition-duration: 1s;
     background: none;
 }
@@ -62,11 +59,6 @@ body {
     margin: 0em 1em 0em 0em;
     border: 0.5px solid black;
     transition-duration: 0.2s;
-    border-radius: .3em;
-}
-
-button:focus {
-    outline: none;
 }
 
 .buttonChoice:hover {
@@ -84,7 +76,6 @@ button:focus {
     margin: 1em 0em 0em 0em;
     background: black;
     color: orangered;
-    border-radius: .3em;
     padding: .5em;
     transition-duration: .3s;
 }
@@ -92,57 +83,69 @@ button:focus {
 .buttonGen:hover {
     background: orangered;
     color: white;
-    border-color: white;
+    border-color: orangered;
 }
-
-.correct {
-    border-color: greenyellow;
-}
-
 
 /* Flash class and keyframe animation */
+
 .blink {
-    color: greenyellow;
-      -webkit-animation: flash linear 0.8s infinite;
-      animation: flash linear 0.8s infinite;
-  }
-  @-webkit-keyframes flash {
-      0% { opacity: 1; } 
-      50% { opacity: .2; } 
-      100% { opacity: 1; }
-  }
-  @keyframes flash {
-      0% { opacity: 1; } 
-      50% { opacity: .2; } 
-      100% { opacity: 1; }
-  }
+    -webkit-animation: flash linear 0.8s infinite;
+    animation: flash linear 0.8s infinite;
+}
+
+@-webkit-keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .2;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .2;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 /* =============== END JS APP CONTENT STYLES =============== */
 
 /* =============== BEGIN MODAL STYLES =============== */
+
 #modal {
-    display: block;
-    position: fixed;
+    /* display: block; */
+    /* position: fixed;
     top: 0;
-    z-index: 100;
+    z-index: 100; */
     background: black;
     min-height: 100vh;
     width: 100%;
-    padding: 10% 0 0 0;
+    padding: 2em 0 0 0;
 }
 
 #transData {
     width: 60%;
     margin: auto;
     visibility: inherit;
+    margin-bottom: 10em;
+}
+
+#results {
+    margin: 2em 0 0 0;
 }
 
 .checkRow {
     margin: 1em 0em 0em 0em;
     color: orangered;
 }
+
 /* =============== END MODAL STYLES =============== */
-
-.hidden {
-    visibility: hidden;
-}
-

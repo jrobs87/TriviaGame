@@ -34,6 +34,21 @@ var questionsArray = [ // question array of objects
         choices: ['sputnik', 'voyager 2', 'voyager 1', 'cassini'],
     },
     {
+        question: 'what type of galaxy is the most common in the universe?',
+        answer: 'elliptical',
+        choices: ['spiral', 'circular', 'sombrero', 'elliptical'],
+    },
+    {
+        question: 'how old is the universe in years? (plus or minus 1 billion years.)',
+        answer: '13.8',
+        choices: ['13.8', '2.7', '6.5', '11.2'],
+    },
+    {
+        question: 'what percent of the universe is dark matter? (plus or minus 2%.)',
+        answer: '27%',
+        choices: ['22%', '45%', '27%', '19%'],
+    },
+    {
         question: 'what is the upper threshold of the suns gravitational influence?',
         answer: 'oort cloud',
         choices: ['oort cloud', 'kaiper belt', 'astroid belt', 'pluto'],
@@ -44,13 +59,9 @@ var questionsArray = [ // question array of objects
 var activeAnswers = 0; // count for active answers (used to set the submit button to blink once all questions have been answered)
 var correctAnswers = 0;
 
-function refreshPage(){
+function refreshPage() {
     window.location.reload();
 }
-
-// add a random background image via css to body for each new game (need array and random number gen)
-// add a randomizer and large question bank the questions can be shuffled for each game
-// add countdown timer element with changing colors as clock gets below 10 seconds or something similar
 
 // [==========] BEGIN QUESTION BLOCK ELEMENTS [==========]
 for (i = 0; i < questionsArray.length; i++) { // loops through question objects to create a new question block
@@ -63,7 +74,7 @@ for (i = 0; i < questionsArray.length; i++) { // loops through question objects 
     questionBlock.classList.add('question_Block'); // assigns class name to question block
     questionBlock.setAttribute("id", questionBlockID); // sets ID for appending the question container element
 
-    var questionCont = document.createElement('h6'); // creates the question container 
+    var questionCont = document.createElement('div'); // creates the question container 
     questionCont.classList.add('question_Container'); // assigns class name to question container
 
     var content = document.createTextNode((i + 1) + '. ' + questionsArray[i].question); // create text node for the question
@@ -93,59 +104,61 @@ for (i = 0; i < questionsArray.length; i++) { // loops through question objects 
 };
 // [==========] END QUESTION BLOCK ELEMENTS [==========]
 
-// [==========] BEGIN USER-INPUTS AND GAME INTERACTIONS [==========]
+
+
 $(document).ready(function () {
 
-    console.log("Stayed at the ace hotel!"); // ready for the app to run 
     preventTimerCheck = true;
 
     function check() {
         preventTimerCheck = false; // prevents check() from being called on timeout
         $('#modal').removeClass('hidden');
+        $('#main').addClass('hidden');
 
         for (b = 0; b < questionsArray.length; b++) {
 
             buttonToCheck = '#answer_Container_' + b; // grabs the button container to access children (buttons)
             answer = $(buttonToCheck).children(".active").text();
+
             questionNumber = b + 1;
+            question = questionsArray[b].question;
+            returnStatus = '';
 
-            if  (answer === questionsArray[b].answer) { // 'active' class compares text content (answer) to answer key in questionsArray objects
-                
-                row = $('<div>');
-                row.addClass('checkRow');
-
-                question = questionsArray[b].question;
-                row.append(questionNumber + '. ' + question);
-                req = 'request > ' + answer + '  |  response > ' + questionsArray[b].answer + '  |  result > ok';
-                
-
-                $('#results').append(row);
-                $('#results').append(req);
-
+            if (answer === questionsArray[b].answer) { // 'active' class compares text content (answer) to answer key in questionsArray objects
+                returnStatus = 'valid';
                 correctAnswers++;
+
             } else {
-
-                row = $('<div>');
-                row.addClass('checkRow');
-
-                question = questionsArray[b].question;
-                row.append(questionNumber + '. ' + question);
-                req = 'request > ' + answer + '  |  response > ' + questionsArray[b].answer + '  |  result > invalid';
-                
-
-                $('#results').append(row);
-                $('#results').append(req);
-
-                console.log('Question ' + b + ' is incorrect... The answer is ' + questionsArray[b].answer) + '.'; // feedback for incorrect answer
+                returnStatus = 'error';
+                answer = '...'
             };
+
+            row = $('<div>');
+            row.addClass('checkRow');
+
+            req = 'request > ' + answer + '  |  response > ' + questionsArray[b].answer + '  |  result > ' + returnStatus;
+
+            row.append(questionNumber + '. ' + question);
+            $('#results').append(row);
+            $('#results').append(req);
         };
 
+        percentage = Math.round(correctAnswers / questionsArray.length * 100);
 
+        $('#percentCorrect').text('transmission accuracy: ' + percentage + "%")
+        if (percentage > 80) {
+            $('#percentCorrect').css('color', 'greenyellow');
+        } else if (percentage < 80) {
+            $('#percentCorrect').css('color', 'yellow');
+        } if (percentage < 50) {
+            $('#percentCorrect').css('color', 'cyan');
+        }
+        console.log(percentage)
     };
 
     // [==========] BEGIN TIMER [==========]
     var counter = {
-        end: 30, // countdown timer - seconds 
+        end: 31, // countdown timer - seconds 
         endMessage: 'TimeouT', // message for time ending
     }; // declares counter object
 
@@ -161,8 +174,8 @@ $(document).ready(function () {
                 counter.end = counter.endMessage;
 
                 if (preventTimerCheck) {
-                check(); // calls function to check win conditions
-                console.log('Check() on timeout.')
+                    check(); // calls function to check win conditions
+                    console.log('Check() on timeout.')
                 } else {
                     console.log('Check() on timeout prevented.')
                 };
@@ -178,6 +191,7 @@ $(document).ready(function () {
 
     // [==========] END TIMER [==========]
 
+    // [==========] BEGIN USER-INPUTS AND GAME INTERACTIONS [==========]
     // buttons will need to have an active class added and removed to/from siblings to indicate this is our answer selection
     $('.buttonChoice').on('click', function () {
         $(this).addClass('active'); // sets the button class to active.  active class determines user answer
@@ -192,7 +206,7 @@ $(document).ready(function () {
     $('#run').on('click', check);
 
     $('#reload').on('click', refreshPage);
-   
+
 });
 
 
