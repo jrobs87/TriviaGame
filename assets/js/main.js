@@ -2,12 +2,7 @@
 // For this project, I opted to not set the markup at the start and instead to have js do the rendering.
 // I wanted to practice DOM manipulation and traversals - this will help later when building dynamic apps.
 
-
-// declaring our variables
-// declaring our functions
-
-// question array of objects 
-var questionsArray = [
+var questionsArray = [ // question array of objects 
     {
         question: 'What is your Home planet?',
         answer: 'earth',
@@ -39,7 +34,7 @@ var questionsArray = [
         choices: ['sputnik', 'voyager 2', 'voyager 1', 'cassini'],
     },
     {
-        question: 'what is the threshold of the suns gravitational influence?',
+        question: 'what is the upper threshold of the suns gravitational influence?',
         answer: 'oort cloud',
         choices: ['oort cloud', 'kaiper belt', 'astroid belt', 'pluto'],
     }
@@ -47,6 +42,10 @@ var questionsArray = [
 ];
 
 var activeAnswers = 0; // count for active answers (used to set the submit button to blink once all questions have been answered)
+var correctAnswers = 0;
+
+
+
 
 // add a random background image via css to body for each new game (need array and random number gen)
 // add a randomizer and large question bank the questions can be shuffled for each game
@@ -95,7 +94,69 @@ for (i = 0; i < questionsArray.length; i++) { // loops through question objects 
 
 // [==========] BEGIN USER-INPUTS AND GAME INTERACTIONS [==========]
 $(document).ready(function () {
+
     console.log("Stayed at the ace hotel!"); // ready for the app to run 
+    preventTimerCheck = true;
+
+    function check() {
+        for (b = 0; b < questionsArray.length; b++) {
+            buttonToCheck = '#answer_Container_' + b; // grabs the button container to access children (buttons)
+            answer = $(buttonToCheck).children(".active").text();
+            if  (answer === questionsArray[b].answer) { // 'active' class compares text content (answer) to answer key in questionsArray objects
+                console.log('Question ' + b + ' is correct! The answer is ' + questionsArray[b].answer + '.'); // feedback for correct answer
+                row = $('<div>');
+                row.addClass('checkRow');
+
+                question = questionsArray[b].question;
+                row.append(b + '. ' + question);
+                req = 'request > ' + answer + '  |  response > ' + questionsArray[b].answer + '  |  result > ok';
+                preventTimerCheck = false;
+
+                $('#results').append(row);
+                $('#results').append(req);
+
+                correctAnswers++;
+            } else {
+                console.log('Question ' + b + ' is incorrect... The answer is ' + questionsArray[b].answer) + '.'; // feedback for incorrect answer
+            };
+        };
+
+
+    };
+
+    // [==========] BEGIN TIMER [==========]
+    var counter = {
+        end: 30, // countdown timer - seconds 
+        endMessage: 'TimeouT', // message for time ending
+    }; // declares counter object
+
+    timerEl = document.getElementById('timerCount'); // grab our div to show counter
+
+    // Start if not past end date 
+    if (counter.end > 0) {
+        secTicker = setInterval(function () {
+            // Stop if passed end time
+            counter.end--;
+            if (counter.end <= 0) {
+                clearInterval(secTicker);
+                counter.end = counter.endMessage;
+
+                if (preventTimerCheck) {
+                check(); // calls function to check win conditions
+                } else {
+                    console.log('Check() on timeout prevented.')
+                };
+            }
+
+            // Calculate remaining time
+            var secs = counter.end;
+
+            // Update HTML elements
+            timerEl.innerHTML = secs;
+        }, 1000);  // one second intervals
+    }
+
+    // [==========] END TIMER [==========]
 
     // buttons will need to have an active class added and removed to/from siblings to indicate this is our answer selection
     $('.buttonChoice').on('click', function () {
@@ -108,15 +169,10 @@ $(document).ready(function () {
         };
     });
 
-    $('#run').on('click', function () {
-        for (b = 0; b < questionsArray.length; b++) {
-            buttonToCheck = '#answer_Container_' + b; // grabs the button container to access children (buttons)
-            if ($(buttonToCheck).children(".active").text() === questionsArray[b].answer) { // 'active' class compares text content (answer) to answer key in questionsArray objects
-                console.log('Question ' + b + ' is correct! The answer is ' + questionsArray[b].answer + '.'); // feedback for correct answer
-            } else {
-                console.log('Question ' + b + ' is incorrect... The answer is ' + questionsArray[b].answer) + '.'; // feedback for incorrect answer
-            };
-        };
-    });
+    $('#run').on('click', check);
+
+   
 });
+
+
 // [==========] END USER-INPUTS AND GAME INTERACTIONS [==========]
